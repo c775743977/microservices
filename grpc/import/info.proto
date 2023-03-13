@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "./server/service";
+
+message InfoRequest {
+    int32 age = 1;
+    string address = 2;
+    string email = 3;
+}
+
+message InfoResponse {
+    int32 age = 1;
+    string address = 2;
+    string email = 3;
+}
+
+service InfoService {
+    rpc ShowInfo(InfoRequest) returns (InfoResponse);
+}

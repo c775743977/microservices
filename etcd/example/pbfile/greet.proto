@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pbfile;
+
+option go_package = "./";
+
+message GreetRequest {
+    string req = 1;
+}
+
+message GreetResponse {
+    string res = 1;
+    string from = 2;
+}
+
+service Greet {
+    rpc Morning(GreetRequest) returns(GreetResponse);
+    rpc Night(GreetRequest) returns(GreetResponse);
+}
