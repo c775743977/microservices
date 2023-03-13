@@ -1,0 +1,10 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 192.168.108.171:2379
+  - 192.168.108.171:2479
+  - 192.168.108.171:2579
+  Key: user.rpc
+Mysql:
+  DataSource: root:Chen@123@tcp(localhost)/testdb
