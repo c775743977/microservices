@@ -1,0 +1,13 @@
+type Request {
+	UserName string `form:"username"`
+	Password string `form:"password"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+service login-api {
+	@handler LoginHandler
+	post /login (Request) returns (Response)
+}
