@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "./order";
+
+message OrderItem {
+    string OrderID = 1;
+    int64 Num = 2;
+    double Amount = 3;
+    string Title = 4;
+    string Author = 5;
+    double Price = 6;
+}
+
+message OrderItemRes {
+    repeated OrderItem Items = 1;
+}
+
+message AllOrder {
+    repeated OrderRes Orders = 1;
+}
+
+message OrderRes {
+    string ID = 1;
+    string CreateTime = 2;
+    int64 TotalCount = 3;
+    double TotalAmount = 4;
+    int64 Status = 5;
+    int64 UserID = 6;
+    string UserName = 7;
+}
+
+message OrderReqByID {
+    string ID = 1;
+}
+
+message OrderReqByUserID {
+    string UserID = 1;
+}
+
+message OrderItemReq {
+    string OrderID = 1;
+}
+
+service OrderService {
+    rpc CreateOrder(OrderRes) returns(OrderReqByID);
+    rpc CreateOrderItem(OrderItem) returns(OrderReqByID);
+    rpc GetOrderByID(OrderReqByID) returns(OrderRes);
+    rpc GetOrderByUserID(OrderReqByUserID) returns(OrderRes);
+    rpc GetOrderItem(OrderItemReq) returns(OrderItemRes);
+    rpc AlterOrderStatus(OrderRes) returns(OrderRes);
+    rpc GetAllOrder(OrderReqByUserID) returns(AllOrder);
+    rpc DelOrder(OrderReqByID) returns(OrderReqByID);
+}

@@ -1,0 +1,4 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8001
+Mysql:
+  DataSource: root:Chen@123@tcp(localhost)/bookstore

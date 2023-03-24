@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package book;
+
+option go_package = "./book";
+
+message BookRes {
+    int64 ID = 1;
+    string Title = 2;
+    string Author = 3;
+    double Price = 4;
+    int64 Sales = 5;
+    int64 Stock = 6;
+    string Img_path = 7;
+    string Err = 8;
+}
+
+message BookReq {
+    int64 ID = 1;
+}
+
+message PageRes {
+    repeated BookRes Books = 1;
+    int64 PageNo = 2;
+    int64 PageSize = 3;
+    int64 TotalPages = 4;
+    int64 TotalBooks = 5;
+    double MaxPrice = 6;
+    double MinPrice = 7;
+    string UserName = 8;
+}
+
+message PageReq {
+    double MaxPrice = 1;
+    double MinPrice = 2;
+    int64 PageNo = 3;
+}
+
+message Res {
+    string Result = 1;
+}
+
+message Books {
+    repeated BookRes Books = 1;
+}
+
+service BookService {
+    rpc GetBook(BookReq) returns(BookRes);
+    rpc GetPage(PageReq) returns(PageRes);
+    rpc DelBook(BookReq) returns(Res);
+    rpc AlterBook(BookRes) returns(Res);
+    rpc AddBook(BookRes) returns(Res);
+    rpc GetBookByName(BookRes) returns(Books);
+    rpc GetBookByAuthor(BookRes) returns(Books);
+}

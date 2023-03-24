@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user";
+
+message UserReq {
+    int64 UserID = 1;
+}
+
+message UserName {
+    string Name = 1;
+}
+
+message UserRes {
+    int64 UserID = 1;
+    string UserName = 2;
+    string UserPassword = 3;
+    string UserEmail = 4;
+    string UserPrivilege = 5;
+}
+
+message Cookie {
+    string Cookie = 1;
+}
+
+message Session {
+    string Cookie = 1;
+    string UserName = 2;
+    string UserID = 3;
+}
+
+message LoginReq {
+    string UserName = 1;
+    string UserPassword = 2;
+}
+
+message LoginRes {
+    string Result = 1;
+    string Cookie = 2;
+}
+
+message RegisterReq {
+    string UserName = 1;
+    string UserPassword = 2;
+    string UserEmail = 3;
+}
+
+message RegisterRes {
+    string Result = 1;
+}
+
+message RootRes {
+    bool Result = 1;
+}
+
+service UserService{
+    rpc Login(LoginReq) returns(LoginRes);
+    rpc Register(RegisterReq) returns(RegisterRes);
+    rpc GetSession(Cookie) returns(Session);
+    rpc LogOut(Cookie) returns(Cookie);
+    rpc GetUser(UserReq) returns(UserRes);
+    rpc IsRoot(Cookie) returns(RootRes);
+    rpc GetUserByName(UserName) returns(UserRes);
+    rpc CreateCart(UserReq) returns(UserReq);
+}

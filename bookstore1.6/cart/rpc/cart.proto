@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package cart;
+
+option go_package = "./cart";
+
+message BookRes {
+    int64 ID = 1;
+    string Title = 2;
+    string Author = 3;
+    double Price = 4;
+    int64 Sales = 5;
+    int64 Stock = 6;
+    string Img_path = 7;
+    string Err = 8;
+}
+
+message CartReqByName {
+    string UserName = 1;
+}
+
+message CartReqByUserID {
+    int64 UserID = 1;
+}
+
+message CartReqByID {
+    int64 CartID = 1;
+}
+
+message Cart {
+    int64 ID = 1;
+    int64 Num = 2;
+    double Amount = 3;
+    int64 UserID = 4;
+    string UserName = 5;
+    repeated CartItem Items = 6;
+}
+
+message CartItem {
+    int64 CartID = 1;
+    int64 BookID = 2;
+    int64 Num = 3;
+    double Amount = 4;
+    BookRes Book = 5;
+}
+
+message CartItemReq {
+    int64 CartID = 1;
+}
+
+message Result {
+    string Res = 1;
+}
+
+service CartService {
+    rpc GetCartByName(CartReqByName) returns(Cart);
+    rpc GetCartByUserID(CartReqByUserID) returns(Cart);
+    rpc GetCartByID(CartReqByID) returns(Cart);
+    rpc GetCartItem(CartItem) returns(CartItem);
+    rpc CleanCart(CartReqByUserID) returns(Result);
+    rpc CleanCartItem(CartItem) returns(Result);
+    rpc AddToCart(Cart) returns(Result);
+    rpc AlterItem(CartItem) returns(Result);
+    rpc AddItem(CartItem) returns(Result);
+    rpc AddItemNum(CartItem) returns(Result);
+    rpc AlterItemNum(CartItem) returns(Result);
+    rpc DelItem(CartItem) returns(Result);
+    rpc CreateCart(CartReqByUserID) returns(Result);
+}
