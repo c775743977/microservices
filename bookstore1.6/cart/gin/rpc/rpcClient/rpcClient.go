@@ -13,7 +13,7 @@ import (
 
 var bookRpc = "192.168.0.143:8002"
 var userRpc = "192.168.0.143:8001"
-var cartRpc = "192.168.0.143:8003"
+var cartRpc = "192.168.108.157:8003"
 
 func NewCartClient() cart.CartServiceClient {
 	conn, err := grpc.Dial(cartRpc, grpc.WithTransportCredentials(insecure.NewCredentials()))
